@@ -10,6 +10,11 @@
 
 using namespace std;
 
+// Dijkstra template in O(E log V)
+// the template is modified so that:
+// * `node_id div 256` is the number of city
+// * `node_id mod 256` is the current remainder (i.e. distance mod 256)
+// * the graph structure is reused for different remainders
 template <long N>
 struct Dijkstra {
     struct Edge {
@@ -76,6 +81,7 @@ int main() {
     int n;
     cin >> n;
 
+    // construct the graph
     for (int i = 0; i < n; ++i) {
         int s, t, l;
         cin >> s >> t >> l;
@@ -83,10 +89,14 @@ int main() {
         dijk.add(s - 1, t - 1, l);
     }
 
+    // find the shortest path from `node_id = 0` to all the nodes
     dijk.solve(0, -1);
 
+    // for each remainder from the smallest to the largest
     for (int i = 0; i < 256; ++i) {
+        // if reachable
         if (dijk.dist[256 + i] < 1l << 60) {
+            // answer found
             cout << i << ' ' << dijk.dist[256 + i] << endl;
             break;
         }

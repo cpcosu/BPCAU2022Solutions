@@ -22,10 +22,12 @@ int main() {
         cin >> points[i][0] >> points[i][1];
     }
 
-    double answer = 1e6;
+    double answer = INFINITY;
 
-    // maximum error: 4 * 2000 * sin(d(a) / 2)
-    // allowed error: 0.1
+    // try each rotation angle
+    // maximum error = 4 * 2000 * sin(step / 2)
+    // allowed error = 0.1
+    // step = arcsin(0.1 / 4 / 2000) * 2 ~= 1 / 40000
     for (double a = 0; a < 1.5708; a += 1. / 40000) {
         double ksin = sin(a);
         double kcos = cos(a);
@@ -34,6 +36,7 @@ int main() {
         double ymin = INFINITY;
         double ymax = -INFINITY;
 
+        // the perimeter is decided by the left/right/top/bottom-most points
         for (int i = 0; i < n; ++i) {
             double x = points[i][0] * kcos - points[i][1] * ksin;
             double y = points[i][0] * ksin + points[i][1] * kcos;
@@ -44,6 +47,7 @@ int main() {
             ymax = max(ymax, y);
         }
 
+        // update the answer
         answer = min(answer, 2 * (xmax - xmin + ymax - ymin));
     }
 

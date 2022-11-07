@@ -22,6 +22,8 @@ int main() {
     int w_crop = 0;
     int h_crop = 0;
 
+    // read the input
+    // record the location of each character except '?'
     string line;
     while (getline(cin, line)) {
         w_crop = line.size();
@@ -41,10 +43,10 @@ int main() {
     int t_max = 0;
 
     for (int h = 1; h <= 100; ++h) {
-        if (h * 4 + 2 < w_crop || h + 3 < h_crop) continue;
-
         for (int w_offset = 0; w_offset <= h * 4 + 2 - w_crop; ++w_offset) {
             for (int h_offset = 0; h_offset <= h + 3 - h_crop; ++h_offset) {
+                // try each H and offsets first, then T
+
                 bool ok = true;
                 vector<int> v;
 
@@ -85,10 +87,16 @@ int main() {
                         if (cc != ' ') ok = false;
                     } else {
                         if (cc == '_') ok = false;
+                        // this character is related to T
+                        // check it later
                         v.push_back(i);
                     }
 
                     if (!ok) {
+                        // this character does not match
+                        // it is likely more important than other characters
+                        // move it forward
+                        // so we can check it earlier next time
                         swap(x[i / 2], x[i]);
                         swap(y[i / 2], y[i]);
                         swap(c[i / 2], c[i]);
@@ -98,6 +106,8 @@ int main() {
 
                 if (ok) {
                     for (int t = 2 * h + 1; t >= 1; --t) {
+                        // try each T
+
                         bool ok = true;
 
                         for (int i: v) {

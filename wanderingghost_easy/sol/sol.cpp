@@ -17,6 +17,8 @@ bool visited[h + 2][w + 2];
 
 void dfs(int i, int j, int step) {
     if (step < n) {
+        // mark the current location as visited
+        // then visit left, right, top, and bottom
         visited[i][j] = true;
         if (!visited[i - 1][j]) dfs(i - 1, j, step + 1);
         if (!visited[i + 1][j]) dfs(i + 1, j, step + 1);
@@ -32,6 +34,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.precision(10);
+
+    // before DFS, we mark the outside border as visited
+    // it will make the code simpler and faster
 
     for (int i = 0; i <= h + 1; ++i) {
         for (int j = 0; j <= w + 1; ++j) {

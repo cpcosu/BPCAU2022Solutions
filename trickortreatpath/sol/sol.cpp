@@ -22,6 +22,7 @@ int main() {
 
     dice[0][0] = 1;
 
+    // calculate the distribution of dice result
     for (int i = 0; i < d; ++i) {
         for (int j = 1; j <= s; ++j) {
             for (int k = 0; k < n; ++k) {
@@ -30,6 +31,8 @@ int main() {
         }
     }
 
+    // build a Markov transformation matrix
+    // use the dice result by default
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             matrix[i][(i + j) % n] = dice[d][j];
@@ -38,6 +41,7 @@ int main() {
         p[0][i] = 1000. / n;
     }
 
+    // update the transformation matrix as specified in the input
     for (int i = 0; i < c; ++i) {
         int from, to;
         cin >> from;
@@ -62,6 +66,8 @@ int main() {
         }
     }
 
+    // simulation
+    // it is not the most accurate solution, just easier to implement
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < n; ++j) {
             for (int k = 0; k < n; ++k) {
@@ -70,6 +76,7 @@ int main() {
         }
 
         for (int j = 0; j < n; ++j) {
+            // smooth the vector to guarantee convergence
             p[i + 1][j] = 0.1 * p[i][j] + 0.9 * p[i + 1][j];
         }
     }
@@ -78,6 +85,7 @@ int main() {
         p[100][i] = round(p[100][i]);
     }
 
+    // find the top 3
     for (int i = 0; i < 3; ++i) {
         int best = 0;
 

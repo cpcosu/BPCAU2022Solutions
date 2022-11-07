@@ -11,7 +11,7 @@ The room keeper of the Horror Hotel is a zombie! At every night, he takes a sequ
 <li>All the doors are closed at the beginning and should be closed at the end.</li>
 </ol>
 <br><br>
-It works perfectly. The zombie can finish these actions without getting stuck. Until one day, he bit a guest and turned the guest into another zombie! Now, two zombies will take the same sequence of actions in an arbitrary order. Is it possible that they can get into infinite waiting?
+It works perfectly. The zombie can finish these actions without getting stuck. Until one day, he bit a guest and turned the guest into another zombie! Now, two zombies will take the same sequence of actions. The order of actions between them is arbitrary. Is it possible that they can get into infinite waiting?
 
 
 ## Input

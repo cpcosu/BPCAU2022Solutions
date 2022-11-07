@@ -10,6 +10,7 @@
 
 using namespace std;
 
+// Dijkstra template in O(E log V)
 template <long N>
 struct Dijkstra {
     struct Edge {
@@ -78,6 +79,8 @@ int main() {
 
     int p = 1;
 
+    // give each location a number (node_id)
+    // number of the outside is 0
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= n + 1 - i; ++j) {
             for (int k = 1; k <= n + 2 - i - j; ++k) {
@@ -87,6 +90,7 @@ int main() {
         }
     }
 
+    // construct the graph
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= n + 1 - i; ++j) {
             for (int k = 1; k <= n + 2 - i - j; ++k) {
@@ -117,6 +121,7 @@ int main() {
 
     long res = 0;
 
+    // find the furthest node
     for (int i = 1; i < p; ++i) {
         res = max(res, dijk.dist[i]);
     }

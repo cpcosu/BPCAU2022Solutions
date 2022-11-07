@@ -9,6 +9,8 @@
 
 using namespace std;
 
+// SPFA template
+// bad time complexity, but able to hack the test data
 template <long N>
 struct SPFA {
     struct Edge {
